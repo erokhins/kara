@@ -1,0 +1,80 @@
+
+package kotlin.html5
+
+public trait CommonAttributeGroup: AttributesMap
+    public var CommonAttributeGroup.accesskey: String by Attributes.accesskey
+    public var CommonAttributeGroup.c: String by Attributes.c
+    public var CommonAttributeGroup.contenteditable: Boolean by Attributes.contenteditable
+    public var CommonAttributeGroup.contextmenu: String by Attributes.contextmenu
+    public var CommonAttributeGroup.data_FolderName: String by Attributes.data_FolderName
+    public var CommonAttributeGroup.data_MsgId: String by Attributes.data_MsgId
+    public var CommonAttributeGroup.dir: Dir by Attributes.dir
+    public var CommonAttributeGroup.draggable: Draggable by Attributes.draggable
+    public var CommonAttributeGroup.hidden: Boolean by Attributes.hidden
+    public var CommonAttributeGroup.id: String by Attributes.id
+    public var CommonAttributeGroup.item: String by Attributes.item
+    public var CommonAttributeGroup.itemprop: String by Attributes.itemprop
+    public var CommonAttributeGroup.lang: I18LanguageCode by Attributes.lang
+    public var CommonAttributeGroup.role: String by Attributes.role
+    public var CommonAttributeGroup.runat: Runat by Attributes.runat
+    public var CommonAttributeGroup.spellcheck: Boolean by Attributes.spellcheck
+    public var CommonAttributeGroup.style: String by Attributes.style
+    public var CommonAttributeGroup.subject: String by Attributes.subject
+    public var CommonAttributeGroup.tabIndex: String by Attributes.tabIndex
+    public var CommonAttributeGroup.title: String by Attributes.title
+
+public trait CommonEventsGroup: AttributesMap
+    public var CommonEventsGroup.onabort: String by Attributes.onabort
+    public var CommonEventsGroup.onblur: String by Attributes.onblur
+    public var CommonEventsGroup.oncanplay: String by Attributes.oncanplay
+    public var CommonEventsGroup.oncanplaythrough: String by Attributes.oncanplaythrough
+    public var CommonEventsGroup.onchange: String by Attributes.onchange
+    public var CommonEventsGroup.onclick: String by Attributes.onclick
+    public var CommonEventsGroup.oncontextmenu: String by Attributes.oncontextmenu
+    public var CommonEventsGroup.ondblclick: String by Attributes.ondblclick
+    public var CommonEventsGroup.ondrag: String by Attributes.ondrag
+    public var CommonEventsGroup.ondragenter: String by Attributes.ondragenter
+    public var CommonEventsGroup.ondragleave: String by Attributes.ondragleave
+    public var CommonEventsGroup.ondragover: String by Attributes.ondragover
+    public var CommonEventsGroup.ondragstart: String by Attributes.ondragstart
+    public var CommonEventsGroup.ondrop: String by Attributes.ondrop
+    public var CommonEventsGroup.ondurationchange: String by Attributes.ondurationchange
+    public var CommonEventsGroup.onemptied: String by Attributes.onemptied
+    public var CommonEventsGroup.onended: String by Attributes.onended
+    public var CommonEventsGroup.onerror: String by Attributes.onerror
+    public var CommonEventsGroup.onfocus: String by Attributes.onfocus
+    public var CommonEventsGroup.onformchange: String by Attributes.onformchange
+    public var CommonEventsGroup.onforminput: String by Attributes.onforminput
+    public var CommonEventsGroup.oninput: String by Attributes.oninput
+    public var CommonEventsGroup.oninvalid: String by Attributes.oninvalid
+    public var CommonEventsGroup.onkeydown: String by Attributes.onkeydown
+    public var CommonEventsGroup.onkeypress: String by Attributes.onkeypress
+    public var CommonEventsGroup.onkeyup: String by Attributes.onkeyup
+    public var CommonEventsGroup.onload: String by Attributes.onload
+    public var CommonEventsGroup.onloadeddata: String by Attributes.onloadeddata
+    public var CommonEventsGroup.onloadedmetadata: String by Attributes.onloadedmetadata
+    public var CommonEventsGroup.onloadstart: String by Attributes.onloadstart
+    public var CommonEventsGroup.onmousedown: String by Attributes.onmousedown
+    public var CommonEventsGroup.onmousemove: String by Attributes.onmousemove
+    public var CommonEventsGroup.onmouseout: String by Attributes.onmouseout
+    public var CommonEventsGroup.onmouseover: String by Attributes.onmouseover
+    public var CommonEventsGroup.onmouseup: String by Attributes.onmouseup
+    public var CommonEventsGroup.onmousewheel: String by Attributes.onmousewheel
+    public var CommonEventsGroup.onpause: String by Attributes.onpause
+    public var CommonEventsGroup.onplay: String by Attributes.onplay
+    public var CommonEventsGroup.onplaying: String by Attributes.onplaying
+    public var CommonEventsGroup.onprogress: String by Attributes.onprogress
+    public var CommonEventsGroup.onratechange: String by Attributes.onratechange
+    public var CommonEventsGroup.onreadystatechange: String by Attributes.onreadystatechange
+    public var CommonEventsGroup.onscroll: String by Attributes.onscroll
+    public var CommonEventsGroup.onseeked: String by Attributes.onseeked
+    public var CommonEventsGroup.onseeking: String by Attributes.onseeking
+    public var CommonEventsGroup.onselect: String by Attributes.onselect
+    public var CommonEventsGroup.onshow: String by Attributes.onshow
+    public var CommonEventsGroup.onstalled: String by Attributes.onstalled
+    public var CommonEventsGroup.onsubmit: String by Attributes.onsubmit
+    public var CommonEventsGroup.onsuspend: String by Attributes.onsuspend
+    public var CommonEventsGroup.ontimeupdate: String by Attributes.ontimeupdate
+    public var CommonEventsGroup.onvolumenchange: String by Attributes.onvolumenchange
+    public var CommonEventsGroup.onwaiting: String by Attributes.onwaiting
+
