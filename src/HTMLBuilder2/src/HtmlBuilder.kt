@@ -177,13 +177,28 @@ open class HtmlBodyTag(containingTag: HtmlBodyTag?, tagName: String, renderStyle
     HtmlTag(containingTag, tagName, renderStyle, contentStyle) {
     public open val attr: BaseAttributes<HtmlBodyTag> = BaseAttributes<HtmlBodyTag>(this)
     public open val events: BaseEvents<HtmlBodyTag> = BaseEvents<HtmlBodyTag>(this)
+    public var id: String
+        get() {
+            return attr.id
+        }
+        set(v: String) {
+            attr.id = v
+        }
+
+    public var c: StyleClass
+        get() {
+            return attr.c
+        }
+        set(v: StyleClass) {
+            attr.c = v
+        }
+
 }
 
 val <T> empty_contents: T.() -> Unit = { }
 
 fun <T : HtmlBodyTag> HtmlBodyTag.contentTag(tag: T, c: StyleClass? = null, id: String? = null, contents: T.() -> Unit = empty_contents) {
-    //TODO:
-    //    if (id != null) tag.id = id
-    //    if (c != null) tag.c = c
+    if (id != null) tag.id = id
+    if (c != null) tag.c = c
     build(tag, contents)
 }
