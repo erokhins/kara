@@ -160,3 +160,30 @@ class HtmlText(containingTag: HtmlTag?, private val text: String) : HtmlElement(
 }
 
 class InvalidHtmlException(val message: String) : RuntimeException(message)
+
+public class BaseAttributes<out T: HtmlTag>(htmlTag: T): AbstractAttributes(htmlTag), CommonAttributeGroup {
+    public fun invoke(f: BaseAttributes<T>.() -> Unit) {
+        this.f()
+    }
+}
+
+public class BaseEvents<out T: HtmlTag>(htmlTag: T): AbstractAttributes(htmlTag), CommonEventsGroup {
+    public fun invoke(f: BaseEvents<T>.() -> Unit) {
+        this.f()
+    }
+}
+
+open class HtmlBodyTag(containingTag: HtmlBodyTag?, tagName: String, renderStyle: RenderStyle = RenderStyle.expanded, contentStyle: ContentStyle = ContentStyle.block):
+    HtmlTag(containingTag, tagName, renderStyle, contentStyle) {
+    public open val attr: BaseAttributes<HtmlBodyTag> = BaseAttributes<HtmlBodyTag>(this)
+    public open val events: BaseEvents<HtmlBodyTag> = BaseEvents<HtmlBodyTag>(this)
+}
+
+val <T> empty_contents: T.() -> Unit = { }
+
+fun <T : HtmlBodyTag> HtmlBodyTag.contentTag(tag: T, c: StyleClass? = null, id: String? = null, contents: T.() -> Unit = empty_contents) {
+    //TODO:
+    //    if (id != null) tag.id = id
+    //    if (c != null) tag.c = c
+    build(tag, contents)
+}
