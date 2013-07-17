@@ -3,7 +3,7 @@ package kotlin.html5
 
 public trait CommonAttributeGroup: AttributesMap
     public var CommonAttributeGroup.accesskey: String by Attributes.accesskey
-    public var CommonAttributeGroup.c: String by Attributes.c
+    public var CommonAttributeGroup.c: StyleClass by Attributes.c
     public var CommonAttributeGroup.contenteditable: Boolean by Attributes.contenteditable
     public var CommonAttributeGroup.contextmenu: String by Attributes.contextmenu
     public var CommonAttributeGroup.data_FolderName: String by Attributes.data_FolderName

@@ -16,7 +16,7 @@ object Attributes {
     val challenge = StringAttribute("challenge")
     val checked = TickerAttribute("checked")
     val cite = LinkAttribute("cite")
-    val c = StringAttribute("class")
+    val c = ClassAttribute("class")
     val classid = StringAttribute("classid")
     val cols = IntAttribute("cols")
     val colspan = PositiveIntAttribute("colspan")
