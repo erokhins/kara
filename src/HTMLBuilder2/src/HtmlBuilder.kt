@@ -158,6 +158,21 @@ var <T : TagType> Tag<T>.c: StyleClass
         attr.c = value
     }
 
+public var <T : TagType> Tag<T>.style: String
+    get() = attr.style
+    set(value) {
+        attr.style = value
+    }
+
+fun <T : TagType> Tag<T>.style(init: StyledElement.()->Unit) {
+    val element = StyledElement("inline")
+    element.init()
+    val builder = StringBuilder()
+    for ((k, v) in element.attributes) {
+        builder.append("$k:$v;")
+    }
+    this.attr.style = builder.toString()
+}
 
 
 
