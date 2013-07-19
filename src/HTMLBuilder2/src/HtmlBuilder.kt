@@ -209,3 +209,7 @@ class InvalidHtmlException(val message: String) : RuntimeException(message)
 
 val <T> empty_contents: T.() -> Unit = { }
 
+
+fun deprecated() {
+    throw UnsupportedOperationException()
+}
