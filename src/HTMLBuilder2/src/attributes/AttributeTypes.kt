@@ -1,5 +1,10 @@
 package kotlin.html5
 
+trait AttributesMap {
+    public fun get(attName: String): String
+    public fun set(attName: String, attValue: String)
+}
+
 public abstract class Attribute<T>(val name: String) {
     fun get(attMap: AttributesMap, property: PropertyMetadata): T {
         return decode(attMap[name]);

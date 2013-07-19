@@ -1,6 +1,8 @@
 package kotlin.html5
 
 import java.util.*
+import jet.deprecated
+
 
 abstract class HtmlElement(val containingElement: HtmlElement?, val contentStyle: ContentStyle = ContentStyle.block) {
     {
@@ -108,15 +110,75 @@ abstract class HtmlTag(containingTag: HtmlTag?, val tagName: String, val renderS
         attributes[attName] = attValue
     }
 
+ }
+
+open class TagType(val tag: Tag<*>): CommonAttributeGroup, AttributesMap {
+    public override fun get(attName: String): String {
+        return tag[attName]
+    }
+    public override fun set(attName: String, attValue: String) {
+        tag[attName] = attValue
+    }
+
+}
+
+open class Tag<out T>(val containingTag: Tag<*>?, val t: (Tag<*>) -> T, tagName: String) : HtmlTag(containingTag, tagName)  {
+    deprecated("") public open fun String.plus(): HtmlText {
+        throw UnsupportedOperationException()
+    }
+    deprecated("") public open var text: String?
+        get() {
+            throw UnsupportedOperationException()
+        }
+        set(value) {
+            throw UnsupportedOperationException()
+        }
+
+    fun <T : TagType> Tag<*>.contentTag(tag: (Tag<*>) -> T, tagName: String, c: StyleClass? = null, id: String? = null, contents: Tag<T>.() -> Unit = empty_contents) {
+        val newTag = Tag<T>(this, tag, tagName)
+        newTag.contents()
+        if (c != null) newTag.attr.c = c
+        if (id != null) newTag.attr.id = id
+    }
+}
+
+val <T : TagType> Tag<T>.attr: T
+    get() = t(this)
+fun <T : TagType> Tag<T>.attr(f: T.() -> Unit) {
+    attr.f()
+}
+var <T : TagType> Tag<T>.id: String
+    get() = attr.id
+    set(value) {
+        attr.id = value
+    }
+var <T : TagType> Tag<T>.c: StyleClass
+    get() = attr.c
+    set(value) {
+        attr.c = value
+    }
+
+
+
+
+fun <T : TagType> Tag<*>.contentTag(tag: (Tag<*>) -> T, tagName: String, c: StyleClass? = null, id: String? = null, contents: TagWithText<T>.() -> Unit = empty_contents) {
+    val newTag = TagWithText<T>(this, tag, tagName)
+    newTag.contents()
+    if (c != null) newTag.attr.c = c
+    if (id != null) newTag.attr.id = id
+}
+
+
+class TagWithText<out T>(containingTag: Tag<*>?, t: (Tag<*>) -> T, tagName: String) : Tag<T>(containingTag, t, tagName) {
     /**
      * Override the plus operator to add a text element.
      */
-    protected fun String.plus(): HtmlText = HtmlText(this@HtmlTag, this)
+    public override fun String.plus(): HtmlText = HtmlText(this@TagWithText, this)
 
     /**
      * Yet another way to set the text content of the node.
      */
-    protected var text: String?
+    public override var text: String?
         get() {
             if (children.size > 0)
                 return children[0].toString()
@@ -125,28 +187,11 @@ abstract class HtmlTag(containingTag: HtmlTag?, val tagName: String, val renderS
         set(value) {
             children.clear()
             if (value != null)
-                HtmlText(this@HtmlTag, value)
+                HtmlText(this@TagWithText, value)
         }
+
 }
 
-trait AllowText {
-    public fun String.plus(): HtmlText
-    public var text: String?
-}
-
-trait AttributesMap {
-    public fun get(attName: String): String
-    public fun set(attName: String, attValue: String)
-}
-
-public abstract class AbstractAttributes(val htmlTag: HtmlTag): AttributesMap {
-    public override fun get(attName: String): String {
-        return htmlTag[attName]
-    }
-    public override fun set(attName: String, attValue: String) {
-        htmlTag[attName] = attValue
-    }
-}
 
 class HtmlText(containingTag: HtmlTag?, private val text: String) : HtmlElement(containingTag, ContentStyle.text) {
     override fun renderElement(builder: StringBuilder, indent: String) {
@@ -161,44 +206,6 @@ class HtmlText(containingTag: HtmlTag?, private val text: String) : HtmlElement(
 
 class InvalidHtmlException(val message: String) : RuntimeException(message)
 
-public class BaseAttributes<out T: HtmlTag>(htmlTag: T): AbstractAttributes(htmlTag), CommonAttributeGroup {
-    public fun invoke(f: BaseAttributes<T>.() -> Unit) {
-        this.f()
-    }
-}
-
-public class BaseEvents<out T: HtmlTag>(htmlTag: T): AbstractAttributes(htmlTag), CommonEventsGroup {
-    public fun invoke(f: BaseEvents<T>.() -> Unit) {
-        this.f()
-    }
-}
-
-open class HtmlBodyTag(containingTag: HtmlBodyTag?, tagName: String, renderStyle: RenderStyle = RenderStyle.expanded, contentStyle: ContentStyle = ContentStyle.block):
-    HtmlTag(containingTag, tagName, renderStyle, contentStyle) {
-    public open val attr: BaseAttributes<HtmlBodyTag> = BaseAttributes<HtmlBodyTag>(this)
-    public open val events: BaseEvents<HtmlBodyTag> = BaseEvents<HtmlBodyTag>(this)
-    public var id: String
-        get() {
-            return attr.id
-        }
-        set(v: String) {
-            attr.id = v
-        }
-
-    public var c: StyleClass
-        get() {
-            return attr.c
-        }
-        set(v: StyleClass) {
-            attr.c = v
-        }
-
-}
 
 val <T> empty_contents: T.() -> Unit = { }
 
-fun <T : HtmlBodyTag> HtmlBodyTag.contentTag(tag: T, c: StyleClass? = null, id: String? = null, contents: T.() -> Unit = empty_contents) {
-    if (id != null) tag.id = id
-    if (c != null) tag.c = c
-    build(tag, contents)
-}
