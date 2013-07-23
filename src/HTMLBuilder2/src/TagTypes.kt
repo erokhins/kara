@@ -188,6 +188,7 @@ class INPUT(tag: Tag<*>) : TagType(tag)
     public var INPUT.maxlength: String by Attributes.maxlength
     public var INPUT.min: String by Attributes.stringMin
     public var INPUT.multiple: Boolean by Attributes.multiple
+    public var INPUT.name: String by Attributes.stringName
     public var INPUT.pattern: String by Attributes.pattern
     public var INPUT.placeholder: String by Attributes.placeholder
     public var INPUT.readonly: Boolean by Attributes.readonly
