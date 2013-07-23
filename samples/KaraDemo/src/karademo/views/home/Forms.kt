@@ -10,7 +10,7 @@ import kotlin.html.*
 class Forms(val book : Book) : HtmlView(DefaultLayout()) {
     override fun HtmlBodyTag.render(context: ActionContext) {
         h2 { +"Forms" }
-        formForBean(book, Home.Update(), FormMethod.post) {
+        formForBean(book, Home.Update(), Method.post) {
 
             table(fields) {
                 tr {

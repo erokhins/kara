@@ -28,7 +28,7 @@ abstract class HtmlView(val layout : HtmlLayout? = null) : ActionResult {
     }
 
     fun toString(context: ActionContext): String {
-        val root = object: HtmlBodyTag(null, "view") {}
+        val root = HtmlBodyTag()
         root.render(context)
 
         val builder = StringBuilder()

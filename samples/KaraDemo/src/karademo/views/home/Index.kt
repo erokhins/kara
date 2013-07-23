@@ -31,8 +31,10 @@ class Index(): HtmlView(DefaultLayout()) {
             fieldset() {
                 label{ +"Text Input" }
                 input {
-                    inputType = InputType.text
-                    value = "Text"
+                    attr {
+                        type_ = InputType.text
+                        value = "Text"
+                    }
                 }
             }
         }

@@ -45,7 +45,7 @@ fun HEAD.style(media: String = "all", mimeType: String = "text/css", buildSheet:
 
 fun HEAD.stylesheet(stylesheet: Stylesheet)  = build(STYLESHEETLINK(this, stylesheet), { })
 
-class STYLE(containingTag : HEAD, val stylesheet : Stylesheet) : HtmlTagWithText(containingTag, "style") {
+class STYLE(containingTag : HEAD, val stylesheet : Stylesheet) : HtmlHeadTagWithText(containingTag, "style") {
     public var media : String by StringAttribute("media")
     public var mimeType : String by Attributes.mimeType
 
@@ -63,10 +63,10 @@ class STYLE(containingTag : HEAD, val stylesheet : Stylesheet) : HtmlTagWithText
 
 class STYLESHEETLINK(containingTag : HEAD, var stylesheet : Stylesheet) : HtmlTag(containingTag, "link", RenderStyle.empty) {
     public var href : Link by Attributes.href
-    public var rel : String by Attributes.rel
+    public var rel : LinkType by Attributes.rel
     public var mimeType : String by Attributes.mimeType
     {
-        rel = "stylesheet"
+        rel = LinkType.stylesheet
         mimeType = "text/css"
     }
 

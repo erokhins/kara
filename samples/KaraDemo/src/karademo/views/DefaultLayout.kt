@@ -17,13 +17,17 @@ class DefaultLayout(): HtmlLayout() {
             }
             +"Kara is devloped by: "
             a {
-                text = "Tiny Mission"
-                href = "http://tinymission.com".link()
+                attr{
+                    text = "Tiny Mission"
+                    href = "http://tinymission.com".link()
+                }
             }
             +" and "
             a {
-                text = "JetBrains"
-                href = "http://jetbrains.com".link()
+                attr{
+                    text = "JetBrains"
+                    href = "http://jetbrains.com".link()
+                }
             }
         }
     }
