@@ -10,3 +10,11 @@ open class HTML() : HtmlTag(null, "html") {
     }
 }
 
+//fun HTML.body(init: BODY.() -> Unit) = build(BODY(this), init)
+//class BODY(containingTag: HTML) : HtmlBodyTagWithText(containingTag, "body")
+
+
+fun HTML.body(contents: HtmlBodyTag.() -> Unit) {
+    val newTag = HtmlBodyTag(this, "body")
+    newTag.contents()
+}

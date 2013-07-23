@@ -45,7 +45,8 @@ private fun String.htmlEscape(): String {
     return replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\"", "&quot;")
 }
 
-abstract class HtmlTag(containingTag: HtmlTag?, val tagName: String, val renderStyle: RenderStyle = RenderStyle.expanded, contentStyle: ContentStyle = ContentStyle.block) : HtmlElement(containingTag, contentStyle) {
+abstract class HtmlTag(containingTag: HtmlTag?, val tagName: String, val renderStyle: RenderStyle = RenderStyle.expanded,
+                       contentStyle: ContentStyle = ContentStyle.block) : HtmlElement(containingTag, contentStyle), AttributesMap {
     private val attributes = HashMap<String, String>()
 
     public fun build<T : HtmlTag>(tag: T, contents: T.() -> Unit): T {
@@ -100,19 +101,19 @@ abstract class HtmlTag(containingTag: HtmlTag?, val tagName: String, val renderS
         attributes[name] = value
     }
 
-    public fun get(attributeName: String): String {
-        val answer = attributes[attributeName]
-        if (answer == null) throw RuntimeException("Atrribute $attributeName is missing")
+    public override fun get(attName: String): String {
+        val answer = attributes[attName]
+        if (answer == null) throw RuntimeException("Atrribute $attName is missing")
         return answer
     }
 
-    public fun set(attName: String, attValue: String) {
+    public override fun set(attName: String, attValue: String) {
         attributes[attName] = attValue
     }
 
  }
 
-open class TagType(val tag: Tag<*>): CommonAttributeGroup, AttributesMap {
+open class TagType(val tag: HtmlTag): CommonAttributeGroup, AttributesMap {
     public override fun get(attName: String): String {
         return tag[attName]
     }
@@ -122,7 +123,7 @@ open class TagType(val tag: Tag<*>): CommonAttributeGroup, AttributesMap {
 
 }
 
-open class Tag<out T>(val containingTag: Tag<*>?, val t: (Tag<*>) -> T, tagName: String) : HtmlTag(containingTag, tagName)  {
+open class Tag<out T>(val containingTag: HtmlTag?, val t: (Tag<*>) -> T, tagName: String) : HtmlTag(containingTag, tagName)  {
     deprecated("") public open fun String.plus(): HtmlText {
         throw UnsupportedOperationException()
     }
@@ -184,7 +185,7 @@ fun <T : TagType> Tag<*>.contentTag(tag: (Tag<*>) -> T, tagName: String, c: Styl
 }
 
 
-class TagWithText<out T>(containingTag: Tag<*>?, t: (Tag<*>) -> T, tagName: String) : Tag<T>(containingTag, t, tagName) {
+open class TagWithText<out T>(containingTag: HtmlTag?, t: (Tag<*>) -> T, tagName: String) : Tag<T>(containingTag, t, tagName) {
     /**
      * Override the plus operator to add a text element.
      */
@@ -218,6 +219,11 @@ class HtmlText(containingTag: HtmlTag?, private val text: String) : HtmlElement(
 
     public fun escapedText(): String = text.htmlEscape()
 }
+
+class CommonAllowTag(tag: HtmlTag) : TagType(tag), CommonAllow
+
+open class HtmlBodyTag(containingTag: HtmlTag? = null, tagName: String = "view") : TagWithText<CommonAllowTag>(containingTag, ::CommonAllowTag, tagName)
+
 
 class InvalidHtmlException(val message: String) : RuntimeException(message)
 
