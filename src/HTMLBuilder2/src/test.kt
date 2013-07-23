@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import kotlin.html5.*
-import kotlin.html5.deprecated.*
+import kotlin.html.*
+import kotlin.html.deprecated.*
 
 
 class FOO(tag: Tag<*>) : TagType(tag), CommonAllow
@@ -23,7 +23,7 @@ class FOO(tag: Tag<*>) : TagType(tag), CommonAllow
 
 fun Tag<CommonAllow>.foo(id: String? = null, c: StyleClass? = null, contents: Tag<FOO>.() -> Unit = empty_contents) = contentTag(::FOO, "foo", c, id, contents)
 
-deprecated("") fun Tag<Any>.foo(id: String? = null, c: StyleClass? = null, contents: Tag<FOO>.() -> Unit = empty_contents) {}
+deprecated("") fun HtmlTag.foo(id: String? = null, c: StyleClass? = null, contents: Tag<FOO>.() -> Unit = empty_contents) {}
 
 fun TagWithText<DIV>.f() {
     +""
@@ -71,6 +71,14 @@ fun TagWithText<DIV>.f() {
 }
 
 fun main(args: Array<String>) {
-    TagWithText<DIV>(null, ::DIV, "div").f()
+    val div = TagWithText<DIV>(null, ::DIV, "div")
+    div.f()
+    div.attr.dir = Dir.ltr
+
+    val input = Tag<INPUT>(null, ::INPUT, "input")
+    input.attr.value
+    input.attr {
+        value
+    }
     println()
 }

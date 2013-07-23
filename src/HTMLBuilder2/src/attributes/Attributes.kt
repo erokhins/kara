@@ -1,5 +1,5 @@
 
-package kotlin.html5
+package kotlin.html
 
 object Attributes {
     val pubdate = StringAttribute("Pubdate")

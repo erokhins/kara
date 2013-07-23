@@ -1,4 +1,4 @@
-package kotlin.html5
+package kotlin.html
 
 enum class BackgroundAttachment(val value: String) {
     scroll : BackgroundAttachment("scroll")

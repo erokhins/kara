@@ -1,4 +1,4 @@
-package kotlin.html5.internal
+package kotlin.html.internal
 
 public trait AttFilter {
     fun toExternalForm(): String

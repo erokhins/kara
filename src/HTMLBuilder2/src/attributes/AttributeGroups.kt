@@ -1,5 +1,5 @@
 
-package kotlin.html5
+package kotlin.html
 
 public trait CommonAttributeGroup: AttributesMap
     public var CommonAttributeGroup.accesskey: String by Attributes.accesskey

@@ -1,5 +1,5 @@
 
-package kotlin.html5
+package kotlin.html
 
 public enum class Shape(override val value: String): EnumValues<Shape> {
     circle: Shape("circle")

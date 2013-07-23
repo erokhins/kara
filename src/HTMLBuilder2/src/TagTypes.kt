@@ -1,5 +1,5 @@
 
-package kotlin.html5
+package kotlin.html
 
 class A(tag: Tag<*>) : TagType(tag), CommonAllow
     public var A.href: Link by Attributes.href

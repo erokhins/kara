@@ -1,4 +1,4 @@
-package kotlin.html5
+package kotlin.html
 
 open class HTML() : HtmlTag(null, "html") {
 

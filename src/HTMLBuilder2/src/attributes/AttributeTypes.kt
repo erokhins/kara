@@ -1,4 +1,4 @@
-package kotlin.html5
+package kotlin.html
 
 trait AttributesMap {
     public fun get(attName: String): String

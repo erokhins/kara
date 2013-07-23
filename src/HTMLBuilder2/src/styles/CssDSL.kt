@@ -1,9 +1,9 @@
-package kotlin.html5
+package kotlin.html
 
 import java.util.ArrayList
 import java.util.HashMap
-import kotlin.html5.internal.*
-import kotlin.html5.CssElement.TagSelector
+import kotlin.html.internal.*
+import kotlin.html.CssElement.TagSelector
 
 trait Selector {
     fun toExternalForm(): String

@@ -1,5 +1,5 @@
 
-package kotlin.html5
+package kotlin.html
 
 trait AllowCAPTION
     fun Tag<AllowCAPTION>.caption(id: String? = null, c: StyleClass? = null, contents: TagWithText<CAPTION>.() -> Unit = empty_contents) = contentTag(::CAPTION, "caption", c, id, contents)

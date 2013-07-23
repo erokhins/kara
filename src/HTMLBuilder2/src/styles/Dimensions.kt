@@ -1,4 +1,4 @@
-package kotlin.html5
+package kotlin.html
 
 
 enum class LinearUnits(val value: String) {

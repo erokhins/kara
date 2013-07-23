@@ -1,7 +1,7 @@
 
-package kotlin.html5.deprecated
+package kotlin.html.deprecated
 
-import kotlin.html5.*
+import kotlin.html.*
 import jet.deprecated
 
 deprecated("") fun Tag<Any>.a(id: String? = null, c: StyleClass? = null, contents: TagWithText<A>.() -> Unit = empty_contents) = deprecated()
