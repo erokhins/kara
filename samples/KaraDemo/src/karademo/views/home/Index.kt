@@ -23,20 +23,21 @@ class Index(): HtmlView(DefaultLayout()) {
                     style { backgroundColor = Color.fromRgb(200, 100, i * 50) }
                 }
             }
-            p { +"Ordered List" }
-            ol {
-                li{ +"List Item 1" }
-                li{ +"List Item 2" }
-            }
-            fieldset() {
-                label{ +"Text Input" }
-                input {
-                    attr {
-                        type_ = InputType.text
-                        value = "Text"
-                    }
+        }
+        p { +"Ordered List" }
+        ol {
+            li{ +"List Item 1" }
+            li{ +"List Item 2" }
+        }
+        fieldset() {
+            label{ +"Text Input" }
+            input {
+                attr {
+                    type_ = InputType.text
+                    value = "Text"
                 }
             }
         }
+
     }
 }
