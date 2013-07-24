@@ -41,10 +41,10 @@ abstract class HtmlView(val layout : HtmlLayout? = null) : ActionResult {
 
     /** Subclasses must implement this to provide the primary html to dispay.
     */
-    abstract fun HtmlBodyTag.render(context : ActionContext)
+    abstract fun Tag<CommonAllow>.render(context : ActionContext)
 }
 
-public fun HtmlBodyTag.renderView(context : ActionContext, view : HtmlView) {
+public fun Tag<CommonAllow>.renderView(context : ActionContext, view : HtmlView) {
     with(view) {
         render(context)
     }

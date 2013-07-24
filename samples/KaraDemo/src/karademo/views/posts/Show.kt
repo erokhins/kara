@@ -7,7 +7,7 @@ import karademo.styles.StyleClasses
 import kotlin.html.*
 
 class Show(val post : Post) : HtmlView() {
-    override fun HtmlBodyTag.render(context: ActionContext) {
+    override fun Tag<CommonAllow>.render(context: ActionContext) {
         h3 {+ "Show Post"}
         div(c=date) {
             label {+ "Date:"}
