@@ -123,7 +123,9 @@ open class TagType(val tag: HtmlTag): CommonAttributeGroup, AttributesMap {
 
 }
 
-open class Tag<out T>(val containingTag: HtmlTag?, val t: (Tag<*>) -> T, tagName: String) : HtmlTag(containingTag, tagName)  {
+open class Tag<out T>(val containingTag: HtmlTag?, val t: (Tag<*>) -> T, tagName: String,
+                      renderStyle: RenderStyle = RenderStyle.expanded,
+                      contentStyle: ContentStyle = ContentStyle.block) : HtmlTag(containingTag, tagName, renderStyle, contentStyle)  {
     deprecated("") public open fun String.plus(): HtmlText {
         throw UnsupportedOperationException()
     }
@@ -135,8 +137,11 @@ open class Tag<out T>(val containingTag: HtmlTag?, val t: (Tag<*>) -> T, tagName
             throw UnsupportedOperationException()
         }
 
-    fun <T : TagType> Tag<*>.contentTag(tag: (Tag<*>) -> T, tagName: String, c: StyleClass? = null, id: String? = null, contents: Tag<T>.() -> Unit = empty_contents) {
-        val newTag = Tag<T>(this, tag, tagName)
+    fun <T : TagType> Tag<*>.contentTag(tag: (Tag<*>) -> T, tagName: String, c: StyleClass? = null, id: String? = null,
+                                        contents: Tag<T>.() -> Unit = empty_contents,
+                                        renderStyle: RenderStyle = RenderStyle.expanded,
+                                        contentStyle: ContentStyle = ContentStyle.block) {
+        val newTag = Tag<T>(this, tag, tagName, renderStyle, contentStyle)
         newTag.contents()
         if (c != null) newTag.attr.c = c
         if (id != null) newTag.attr.id = id
@@ -177,15 +182,20 @@ fun <T : TagType> Tag<T>.style(init: StyledElement.()->Unit) {
 
 
 
-fun <T : TagType> Tag<*>.contentTag(tag: (Tag<*>) -> T, tagName: String, c: StyleClass? = null, id: String? = null, contents: TagWithText<T>.() -> Unit = empty_contents) {
-    val newTag = TagWithText<T>(this, tag, tagName)
+fun <T : TagType> Tag<*>.contentTag(tag: (Tag<*>) -> T, tagName: String, c: StyleClass? = null, id: String? = null,
+                                    contents: TagWithText<T>.() -> Unit = empty_contents,
+                                    renderStyle: RenderStyle = RenderStyle.expanded,
+                                    contentStyle: ContentStyle = ContentStyle.block) {
+    val newTag = TagWithText<T>(this, tag, tagName, renderStyle, contentStyle)
     newTag.contents()
     if (c != null) newTag.attr.c = c
     if (id != null) newTag.attr.id = id
 }
 
 
-open class TagWithText<out T>(containingTag: HtmlTag?, t: (Tag<*>) -> T, tagName: String) : Tag<T>(containingTag, t, tagName) {
+open class TagWithText<out T>(containingTag: HtmlTag?, t: (Tag<*>) -> T, tagName: String,
+                              renderStyle: RenderStyle = RenderStyle.expanded,
+                              contentStyle: ContentStyle = ContentStyle.block) : Tag<T>(containingTag, t, tagName, renderStyle, contentStyle) {
     /**
      * Override the plus operator to add a text element.
      */
