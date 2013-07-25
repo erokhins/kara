@@ -1,7 +1,7 @@
 
 package kotlin.html
 
-class A(tag: Tag<*>) : TagType(tag), CommonAllow
+class A : TagType(), CommonAllow
     public var A.href: Link by Attributes.href
     public var A.hreflang: I18LanguageCode by Attributes.hreflang
     public var A.ping: String by Attributes.ping
@@ -9,11 +9,11 @@ class A(tag: Tag<*>) : TagType(tag), CommonAllow
     public var A.target: BrowsingContext by Attributes.target
     public var A.type_: ContentType by Attributes.aType
 
-class ABBR(tag: Tag<*>) : TagType(tag), CommonAllow
+class ABBR : TagType(), CommonAllow
 
-class ADDRESS(tag: Tag<*>) : TagType(tag), CommonAllow
+class ADDRESS : TagType(), CommonAllow
 
-class AREA(tag: Tag<*>) : TagType(tag)
+class AREA : TagType()
     public var AREA.shape: Shape by Attributes.shape
     public var AREA.alt: String by Attributes.alt
     public var AREA.coords: String by Attributes.coords
@@ -25,30 +25,30 @@ class AREA(tag: Tag<*>) : TagType(tag)
     public var AREA.target: BrowsingContext by Attributes.target
     public var AREA.type_: String by Attributes.stringType
 
-class ARTICLE(tag: Tag<*>) : TagType(tag), CommonAllow
+class ARTICLE : TagType(), CommonAllow
     public var ARTICLE.pubdate: String by Attributes.pubdate
 
-class ASIDE(tag: Tag<*>) : TagType(tag), CommonAllow
+class ASIDE : TagType(), CommonAllow
 
-class AUDIO(tag: Tag<*>) : TagType(tag), AllowSOURCE
+class AUDIO : TagType(), AllowSOURCE
     public var AUDIO.autobuffer: Boolean by Attributes.autobuffer
     public var AUDIO.autoplay: Boolean by Attributes.autoplay
     public var AUDIO.controls: Boolean by Attributes.controls
     public var AUDIO.loop: Boolean by Attributes.loop
     public var AUDIO.src: Link by Attributes.src
 
-class B(tag: Tag<*>) : TagType(tag), CommonAllow
+class B : TagType(), CommonAllow
 
-class BDI(tag: Tag<*>) : TagType(tag), CommonAllow
+class BDI : TagType(), CommonAllow
 
-class BDO(tag: Tag<*>) : TagType(tag), CommonAllow
+class BDO : TagType(), CommonAllow
 
-class BLOCKQUOTE(tag: Tag<*>) : TagType(tag), CommonAllow
+class BLOCKQUOTE : TagType(), CommonAllow
     public var BLOCKQUOTE.cite: Link by Attributes.cite
 
-class BR(tag: Tag<*>) : TagType(tag)
+class BR : TagType()
 
-class BUTTON(tag: Tag<*>) : TagType(tag), CommonAllow
+class BUTTON : TagType(), CommonAllow
     public var BUTTON.autofocus: Boolean by Attributes.autofocus
     public var BUTTON.disabled: Boolean by Attributes.disabled
     public var BUTTON.form: String by Attributes.form
@@ -61,23 +61,23 @@ class BUTTON(tag: Tag<*>) : TagType(tag), CommonAllow
     public var BUTTON.type_: ButtonType by Attributes.buttonType
     public var BUTTON.value: String by Attributes.stringValue
 
-class CANVAS(tag: Tag<*>) : TagType(tag)
+class CANVAS : TagType()
     public var CANVAS.height: String by Attributes.height
     public var CANVAS.width: String by Attributes.width
 
-class CAPTION(tag: Tag<*>) : TagType(tag), CommonAllow
+class CAPTION : TagType(), CommonAllow
 
-class CITE(tag: Tag<*>) : TagType(tag), CommonAllow
+class CITE : TagType(), CommonAllow
 
-class CODE(tag: Tag<*>) : TagType(tag), CommonAllow
+class CODE : TagType(), CommonAllow
 
-class COL(tag: Tag<*>) : TagType(tag)
+class COL : TagType()
     public var COL.span: Int by Attributes.span
 
-class COLGROUP(tag: Tag<*>) : TagType(tag), AllowCOL
+class COLGROUP : TagType(), AllowCOL
     public var COLGROUP.span: Int by Attributes.span
 
-class COMMAND(tag: Tag<*>) : TagType(tag)
+class COMMAND : TagType()
     public var COMMAND.checked: Boolean by Attributes.checked
     public var COMMAND.disabled: Boolean by Attributes.disabled
     public var COMMAND.icon: String by Attributes.icon
@@ -85,45 +85,45 @@ class COMMAND(tag: Tag<*>) : TagType(tag)
     public var COMMAND.radiogroup: String by Attributes.radiogroup
     public var COMMAND.type_: CommandType by Attributes.commandType
 
-class DATALIST(tag: Tag<*>) : TagType(tag), CommonAllow, AllowOPTION
+class DATALIST : TagType(), CommonAllow, AllowOPTION
 
-class DD(tag: Tag<*>) : TagType(tag), CommonAllow
+class DD : TagType(), CommonAllow
 
-class DEL(tag: Tag<*>) : TagType(tag), CommonAllow
+class DEL : TagType(), CommonAllow
     public var DEL.cite: Link by Attributes.cite
     public var DEL.datetime: String by Attributes.datetime
 
-class DETAILS(tag: Tag<*>) : TagType(tag), CommonAllow, AllowLEGEND
+class DETAILS : TagType(), CommonAllow, AllowLEGEND
     public var DETAILS.open: Boolean by Attributes.open
 
-class DFN(tag: Tag<*>) : TagType(tag), CommonAllow
+class DFN : TagType(), CommonAllow
 
-class DIALOG(tag: Tag<*>) : TagType(tag), CommonAllow
+class DIALOG : TagType(), CommonAllow
 
-class DIV(tag: Tag<*>) : TagType(tag), CommonAllow
+class DIV : TagType(), CommonAllow
 
-class DL(tag: Tag<*>) : TagType(tag), AllowDD, AllowDT
+class DL : TagType(), AllowDD, AllowDT
 
-class DT(tag: Tag<*>) : TagType(tag), CommonAllow
+class DT : TagType(), CommonAllow
 
-class EM(tag: Tag<*>) : TagType(tag), CommonAllow
+class EM : TagType(), CommonAllow
 
-class EMBED(tag: Tag<*>) : TagType(tag)
+class EMBED : TagType()
     public var EMBED.height: String by Attributes.height
     public var EMBED.src: Link by Attributes.src
     public var EMBED.type_: String by Attributes.stringType
     public var EMBED.width: String by Attributes.width
 
-class FIELDSET(tag: Tag<*>) : TagType(tag), CommonAllow, AllowLEGEND
+class FIELDSET : TagType(), CommonAllow, AllowLEGEND
     public var FIELDSET.disabled: Boolean by Attributes.disabled
     public var FIELDSET.form: String by Attributes.form
     public var FIELDSET.name: String by Attributes.stringName
 
-class FIGURE(tag: Tag<*>) : TagType(tag), CommonAllow, AllowLEGEND
+class FIGURE : TagType(), CommonAllow, AllowLEGEND
 
-class FOOTER(tag: Tag<*>) : TagType(tag), CommonAllow
+class FOOTER : TagType(), CommonAllow
 
-class FORM(tag: Tag<*>) : TagType(tag), CommonAllow
+class FORM : TagType(), CommonAllow
     public var FORM.accept_charset: String by Attributes.accept_charset
     public var FORM.action: Link by Attributes.action
     public var FORM.autocomplete: Autocomplete by Attributes.autocomplete
@@ -133,27 +133,27 @@ class FORM(tag: Tag<*>) : TagType(tag), CommonAllow
     public var FORM.novalidate: Boolean by Attributes.novalidate
     public var FORM.target: BrowsingContext by Attributes.target
 
-class H1(tag: Tag<*>) : TagType(tag), CommonAllow
+class H1 : TagType(), CommonAllow
 
-class H2(tag: Tag<*>) : TagType(tag), CommonAllow
+class H2 : TagType(), CommonAllow
 
-class H3(tag: Tag<*>) : TagType(tag), CommonAllow
+class H3 : TagType(), CommonAllow
 
-class H4(tag: Tag<*>) : TagType(tag), CommonAllow
+class H4 : TagType(), CommonAllow
 
-class H5(tag: Tag<*>) : TagType(tag), CommonAllow
+class H5 : TagType(), CommonAllow
 
-class H6(tag: Tag<*>) : TagType(tag), CommonAllow
+class H6 : TagType(), CommonAllow
 
-class HEADER(tag: Tag<*>) : TagType(tag), CommonAllow
+class HEADER : TagType(), CommonAllow
 
-class HGROUP(tag: Tag<*>) : TagType(tag), AllowH1, AllowH2, AllowH3, AllowH4, AllowH5, AllowH6
+class HGROUP : TagType(), AllowH1, AllowH2, AllowH3, AllowH4, AllowH5, AllowH6
 
-class HR(tag: Tag<*>) : TagType(tag)
+class HR : TagType()
 
-class I(tag: Tag<*>) : TagType(tag), CommonAllow
+class I : TagType(), CommonAllow
 
-class IFRAME(tag: Tag<*>) : TagType(tag)
+class IFRAME : TagType()
     public var IFRAME.height: String by Attributes.height
     public var IFRAME.name: BrowsingContext by Attributes.iframeName
     public var IFRAME.sandbox: Sandbox by Attributes.sandbox
@@ -161,7 +161,7 @@ class IFRAME(tag: Tag<*>) : TagType(tag)
     public var IFRAME.src: Link by Attributes.src
     public var IFRAME.width: String by Attributes.width
 
-class IMG(tag: Tag<*>) : TagType(tag)
+class IMG : TagType()
     public var IMG.alt: String by Attributes.alt
     public var IMG.height: String by Attributes.height
     public var IMG.ismap: Boolean by Attributes.ismap
@@ -169,7 +169,7 @@ class IMG(tag: Tag<*>) : TagType(tag)
     public var IMG.usemap: Link by Attributes.usemap
     public var IMG.width: String by Attributes.width
 
-class INPUT(tag: Tag<*>) : TagType(tag)
+class INPUT : TagType()
     public var INPUT.accept: String by Attributes.accept
     public var INPUT.alt: String by Attributes.alt
     public var INPUT.autocomplete: Autocomplete by Attributes.autocomplete
@@ -200,13 +200,13 @@ class INPUT(tag: Tag<*>) : TagType(tag)
     public var INPUT.value: String by Attributes.stringValue
     public var INPUT.width: String by Attributes.width
 
-class INS(tag: Tag<*>) : TagType(tag), CommonAllow
+class INS : TagType(), CommonAllow
     public var INS.cite: Link by Attributes.cite
     public var INS.datetime: String by Attributes.datetime
 
-class KBD(tag: Tag<*>) : TagType(tag), CommonAllow
+class KBD : TagType(), CommonAllow
 
-class KEYGEN(tag: Tag<*>) : TagType(tag)
+class KEYGEN : TagType()
     public var KEYGEN.autofocus: Boolean by Attributes.autofocus
     public var KEYGEN.challenge: String by Attributes.challenge
     public var KEYGEN.disabled: Boolean by Attributes.disabled
@@ -214,29 +214,29 @@ class KEYGEN(tag: Tag<*>) : TagType(tag)
     public var KEYGEN.keytype: Keytype by Attributes.keytype
     public var KEYGEN.name: String by Attributes.stringName
 
-class LABEL(tag: Tag<*>) : TagType(tag), CommonAllow
+class LABEL : TagType(), CommonAllow
     public var LABEL.forId: String by Attributes.forId
     public var LABEL.form: String by Attributes.form
 
-class LEGEND(tag: Tag<*>) : TagType(tag), CommonAllow
+class LEGEND : TagType(), CommonAllow
 
-class LI(tag: Tag<*>) : TagType(tag), CommonAllow
+class LI : TagType(), CommonAllow
     public var LI.value: String by Attributes.stringValue
 
-class MAP(tag: Tag<*>) : TagType(tag), CommonAllow
+class MAP : TagType(), CommonAllow
     public var MAP.name: String by Attributes.stringName
 
-class MARK(tag: Tag<*>) : TagType(tag), CommonAllow
+class MARK : TagType(), CommonAllow
 
-class MATH(tag: Tag<*>) : TagType(tag), CommonAllow
+class MATH : TagType(), CommonAllow
 
-class MATHML(tag: Tag<*>) : TagType(tag)
+class MATHML : TagType()
 
-class MENU(tag: Tag<*>) : TagType(tag), CommonAllow, AllowLI
+class MENU : TagType(), CommonAllow, AllowLI
     public var MENU.label: String by Attributes.label
     public var MENU.type_: MenuType by Attributes.menuType
 
-class METER(tag: Tag<*>) : TagType(tag), CommonAllow
+class METER : TagType(), CommonAllow
     public var METER.high: Float by Attributes.high
     public var METER.low: Float by Attributes.low
     public var METER.max: Float by Attributes.floatMax
@@ -244,9 +244,9 @@ class METER(tag: Tag<*>) : TagType(tag), CommonAllow
     public var METER.optimum: Float by Attributes.optimum
     public var METER.value: Float by Attributes.floatValue
 
-class NAV(tag: Tag<*>) : TagType(tag), CommonAllow
+class NAV : TagType(), CommonAllow
 
-class OBJECT_(tag: Tag<*>) : TagType(tag), AllowPARAM
+class OBJECT_ : TagType(), AllowPARAM
     public var OBJECT_.classid: String by Attributes.classid
     public var OBJECT_.data: Link by Attributes.data
     public var OBJECT_.form: String by Attributes.form
@@ -256,51 +256,51 @@ class OBJECT_(tag: Tag<*>) : TagType(tag), AllowPARAM
     public var OBJECT_.usemap: Link by Attributes.usemap
     public var OBJECT_.width: String by Attributes.width
 
-class OL(tag: Tag<*>) : TagType(tag), AllowLI
+class OL : TagType(), AllowLI
     public var OL.reversed: Boolean by Attributes.reversed
     public var OL.start: String by Attributes.start
 
-class OPTGROUP(tag: Tag<*>) : TagType(tag), AllowOPTION
+class OPTGROUP : TagType(), AllowOPTION
     public var OPTGROUP.disabled: Boolean by Attributes.disabled
     public var OPTGROUP.label: String by Attributes.label
 
-class OPTION(tag: Tag<*>) : TagType(tag)
+class OPTION : TagType()
     public var OPTION.disabled: Boolean by Attributes.disabled
     public var OPTION.label: String by Attributes.label
     public var OPTION.selected: Boolean by Attributes.selected
     public var OPTION.value: String by Attributes.stringValue
 
-class OUTPUT(tag: Tag<*>) : TagType(tag), CommonAllow
+class OUTPUT : TagType(), CommonAllow
     public var OUTPUT.forId: String by Attributes.forId
     public var OUTPUT.form: String by Attributes.form
     public var OUTPUT.name: String by Attributes.stringName
 
-class P(tag: Tag<*>) : TagType(tag), CommonAllow
+class P : TagType(), CommonAllow
 
-class PARAM(tag: Tag<*>) : TagType(tag)
+class PARAM : TagType()
     public var PARAM.name: String by Attributes.stringName
     public var PARAM.value: String by Attributes.stringValue
 
-class PRE(tag: Tag<*>) : TagType(tag), CommonAllow
+class PRE : TagType(), CommonAllow
 
-class PROGRESS(tag: Tag<*>) : TagType(tag), CommonAllow
+class PROGRESS : TagType(), CommonAllow
     public var PROGRESS.max: Float by Attributes.floatMax
     public var PROGRESS.value: Float by Attributes.floatValue
 
-class Q(tag: Tag<*>) : TagType(tag), CommonAllow
+class Q : TagType(), CommonAllow
     public var Q.cite: Link by Attributes.cite
 
-class RP(tag: Tag<*>) : TagType(tag), CommonAllow
+class RP : TagType(), CommonAllow
 
-class RT(tag: Tag<*>) : TagType(tag), CommonAllow
+class RT : TagType(), CommonAllow
 
-class RUBY(tag: Tag<*>) : TagType(tag), CommonAllow, AllowRP, AllowRT
+class RUBY : TagType(), CommonAllow, AllowRP, AllowRT
 
-class SAMP(tag: Tag<*>) : TagType(tag), CommonAllow
+class SAMP : TagType(), CommonAllow
 
-class SECTION(tag: Tag<*>) : TagType(tag), CommonAllow
+class SECTION : TagType(), CommonAllow
 
-class SELECT(tag: Tag<*>) : TagType(tag), AllowOPTGROUP, AllowOPTION
+class SELECT : TagType(), AllowOPTGROUP, AllowOPTION
     public var SELECT.autofocus: Boolean by Attributes.autofocus
     public var SELECT.disabled: Boolean by Attributes.disabled
     public var SELECT.form: String by Attributes.form
@@ -308,34 +308,34 @@ class SELECT(tag: Tag<*>) : TagType(tag), AllowOPTGROUP, AllowOPTION
     public var SELECT.name: String by Attributes.stringName
     public var SELECT.size: String by Attributes.size
 
-class SMALL(tag: Tag<*>) : TagType(tag), CommonAllow
+class SMALL : TagType(), CommonAllow
 
-class SOURCE(tag: Tag<*>) : TagType(tag)
+class SOURCE : TagType()
     public var SOURCE.media: String by Attributes.media
     public var SOURCE.src: Link by Attributes.src
     public var SOURCE.type_: String by Attributes.stringType
 
-class SPAN(tag: Tag<*>) : TagType(tag), CommonAllow
+class SPAN : TagType(), CommonAllow
 
-class STRONG(tag: Tag<*>) : TagType(tag), CommonAllow
+class STRONG : TagType(), CommonAllow
 
-class SUB(tag: Tag<*>) : TagType(tag), CommonAllow
+class SUB : TagType(), CommonAllow
 
-class SUP(tag: Tag<*>) : TagType(tag), CommonAllow
+class SUP : TagType(), CommonAllow
 
-class SVG(tag: Tag<*>) : TagType(tag)
+class SVG : TagType()
 
-class TABLE(tag: Tag<*>) : TagType(tag), AllowCAPTION, AllowCOLGROUP, AllowTBODY, AllowTFOOT, AllowTHEAD, AllowTR
+class TABLE : TagType(), AllowCAPTION, AllowCOLGROUP, AllowTBODY, AllowTFOOT, AllowTHEAD, AllowTR
     public var TABLE.summary: String by Attributes.summary
 
-class TBODY(tag: Tag<*>) : TagType(tag), AllowTR
+class TBODY : TagType(), AllowTR
 
-class TD(tag: Tag<*>) : TagType(tag), CommonAllow
+class TD : TagType(), CommonAllow
     public var TD.colspan: Int by Attributes.colspan
     public var TD.headers: String by Attributes.headers
     public var TD.rowspan: Int by Attributes.rowspan
 
-class TEXTAREA(tag: Tag<*>) : TagType(tag)
+class TEXTAREA : TagType()
     public var TEXTAREA.autofocus: Boolean by Attributes.autofocus
     public var TEXTAREA.cols: Int by Attributes.cols
     public var TEXTAREA.disabled: Boolean by Attributes.disabled
@@ -348,26 +348,26 @@ class TEXTAREA(tag: Tag<*>) : TagType(tag)
     public var TEXTAREA.rows: Int by Attributes.rows
     public var TEXTAREA.wrap: Wrap by Attributes.wrap
 
-class TFOOT(tag: Tag<*>) : TagType(tag), AllowTR
+class TFOOT : TagType(), AllowTR
 
-class TH(tag: Tag<*>) : TagType(tag), CommonAllow
+class TH : TagType(), CommonAllow
     public var TH.colspan: Int by Attributes.colspan
     public var TH.headers: String by Attributes.headers
     public var TH.rowspan: Int by Attributes.rowspan
     public var TH.scope: Scope by Attributes.scope
 
-class THEAD(tag: Tag<*>) : TagType(tag), AllowTR
+class THEAD : TagType(), AllowTR
 
-class TIME(tag: Tag<*>) : TagType(tag), CommonAllow
+class TIME : TagType(), CommonAllow
     public var TIME.datetime: String by Attributes.datetime
 
-class TR(tag: Tag<*>) : TagType(tag), AllowTD, AllowTH
+class TR : TagType(), AllowTD, AllowTH
 
-class UL(tag: Tag<*>) : TagType(tag), AllowLI
+class UL : TagType(), AllowLI
 
-class VAR_(tag: Tag<*>) : TagType(tag), CommonAllow
+class VAR_ : TagType(), CommonAllow
 
-class VIDEO(tag: Tag<*>) : TagType(tag), AllowSOURCE
+class VIDEO : TagType(), AllowSOURCE
     public var VIDEO.autobuffer: Boolean by Attributes.autobuffer
     public var VIDEO.autoplay: Boolean by Attributes.autoplay
     public var VIDEO.controls: Boolean by Attributes.controls
