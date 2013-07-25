@@ -1,8 +1,5 @@
 
-package kotlin.html.deprecated
-
-import kotlin.html.*
-import jet.deprecated
+package kotlin.html
 
 fun deprecated() {
     throw UnsupportedOperationException()
