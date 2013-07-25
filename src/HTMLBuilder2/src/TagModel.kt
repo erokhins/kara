@@ -48,7 +48,7 @@ trait TagMetadata: AttributesMap {
 }
 
 open class TagType: CommonAttributeGroup, AttributesMap {
-    var metadataManager: TagMetadata? = null // must be set!
+    var metadataManager: TagMetadata? = null // must be init!
     val assertMetadataManager: TagMetadata
         get() {
             return metadataManager!!
@@ -62,7 +62,7 @@ open class TagType: CommonAttributeGroup, AttributesMap {
     }
 }
 
-trait TagWithText
+trait TagWithoutText
 
 trait DeprecateTags
 
@@ -114,7 +114,7 @@ class Tag<out T>(val tagType: () -> T, tagName: String? = null, builder: HtmlBui
         metada.tagName = tagName
     }
     protected override fun assertAllowText() {
-        if (tagType() !is TagWithText) {
+        if (tagType() is TagWithoutText) {
             throw IllegalStateException("Text not allow in tag: ${metada.tagName}")
         }
     }

@@ -13,7 +13,7 @@ class ABBR : TagType(), CommonAllow
 
 class ADDRESS : TagType(), CommonAllow
 
-class AREA : TagType()
+class AREA : TagType(), TagWithoutText
     public var AREA.shape: Shape by Attributes.shape
     public var AREA.alt: String by Attributes.alt
     public var AREA.coords: String by Attributes.coords
@@ -46,7 +46,7 @@ class BDO : TagType(), CommonAllow
 class BLOCKQUOTE : TagType(), CommonAllow
     public var BLOCKQUOTE.cite: Link by Attributes.cite
 
-class BR : TagType()
+class BR : TagType(), TagWithoutText
 
 class BUTTON : TagType(), CommonAllow
     public var BUTTON.autofocus: Boolean by Attributes.autofocus
@@ -71,13 +71,13 @@ class CITE : TagType(), CommonAllow
 
 class CODE : TagType(), CommonAllow
 
-class COL : TagType()
+class COL : TagType(), TagWithoutText
     public var COL.span: Int by Attributes.span
 
-class COLGROUP : TagType(), AllowCOL
+class COLGROUP : TagType(), AllowCOL, TagWithoutText
     public var COLGROUP.span: Int by Attributes.span
 
-class COMMAND : TagType()
+class COMMAND : TagType(), TagWithoutText
     public var COMMAND.checked: Boolean by Attributes.checked
     public var COMMAND.disabled: Boolean by Attributes.disabled
     public var COMMAND.icon: String by Attributes.icon
@@ -85,7 +85,7 @@ class COMMAND : TagType()
     public var COMMAND.radiogroup: String by Attributes.radiogroup
     public var COMMAND.type_: CommandType by Attributes.commandType
 
-class DATALIST : TagType(), CommonAllow, AllowOPTION
+class DATALIST : TagType(), CommonAllow, AllowOPTION, TagWithoutText
 
 class DD : TagType(), CommonAllow
 
@@ -98,17 +98,17 @@ class DETAILS : TagType(), CommonAllow, AllowLEGEND
 
 class DFN : TagType(), CommonAllow
 
-class DIALOG : TagType(), CommonAllow
+class DIALOG : TagType(), CommonAllow, TagWithoutText
 
 class DIV : TagType(), CommonAllow
 
-class DL : TagType(), AllowDD, AllowDT
+class DL : TagType(), AllowDD, AllowDT, TagWithoutText
 
 class DT : TagType(), CommonAllow
 
 class EM : TagType(), CommonAllow
 
-class EMBED : TagType()
+class EMBED : TagType(), TagWithoutText
     public var EMBED.height: String by Attributes.height
     public var EMBED.src: Link by Attributes.src
     public var EMBED.type_: String by Attributes.stringType
@@ -147,9 +147,9 @@ class H6 : TagType(), CommonAllow
 
 class HEADER : TagType(), CommonAllow
 
-class HGROUP : TagType(), AllowH1, AllowH2, AllowH3, AllowH4, AllowH5, AllowH6
+class HGROUP : TagType(), AllowH1, AllowH2, AllowH3, AllowH4, AllowH5, AllowH6, TagWithoutText
 
-class HR : TagType()
+class HR : TagType(), TagWithoutText
 
 class I : TagType(), CommonAllow
 
@@ -161,7 +161,7 @@ class IFRAME : TagType()
     public var IFRAME.src: Link by Attributes.src
     public var IFRAME.width: String by Attributes.width
 
-class IMG : TagType()
+class IMG : TagType(), TagWithoutText
     public var IMG.alt: String by Attributes.alt
     public var IMG.height: String by Attributes.height
     public var IMG.ismap: Boolean by Attributes.ismap
@@ -169,7 +169,7 @@ class IMG : TagType()
     public var IMG.usemap: Link by Attributes.usemap
     public var IMG.width: String by Attributes.width
 
-class INPUT : TagType()
+class INPUT : TagType(), TagWithoutText
     public var INPUT.accept: String by Attributes.accept
     public var INPUT.alt: String by Attributes.alt
     public var INPUT.autocomplete: Autocomplete by Attributes.autocomplete
@@ -223,16 +223,16 @@ class LEGEND : TagType(), CommonAllow
 class LI : TagType(), CommonAllow
     public var LI.value: String by Attributes.stringValue
 
-class MAP : TagType(), CommonAllow
+class MAP : TagType(), CommonAllow, TagWithoutText
     public var MAP.name: String by Attributes.stringName
 
 class MARK : TagType(), CommonAllow
 
-class MATH : TagType(), CommonAllow
+class MATH : TagType(), CommonAllow, TagWithoutText
 
 class MATHML : TagType()
 
-class MENU : TagType(), CommonAllow, AllowLI
+class MENU : TagType(), CommonAllow, AllowLI, TagWithoutText
     public var MENU.label: String by Attributes.label
     public var MENU.type_: MenuType by Attributes.menuType
 
@@ -256,11 +256,11 @@ class OBJECT_ : TagType(), AllowPARAM
     public var OBJECT_.usemap: Link by Attributes.usemap
     public var OBJECT_.width: String by Attributes.width
 
-class OL : TagType(), AllowLI
+class OL : TagType(), AllowLI, TagWithoutText
     public var OL.reversed: Boolean by Attributes.reversed
     public var OL.start: String by Attributes.start
 
-class OPTGROUP : TagType(), AllowOPTION
+class OPTGROUP : TagType(), AllowOPTION, TagWithoutText
     public var OPTGROUP.disabled: Boolean by Attributes.disabled
     public var OPTGROUP.label: String by Attributes.label
 
@@ -277,7 +277,7 @@ class OUTPUT : TagType(), CommonAllow
 
 class P : TagType(), CommonAllow
 
-class PARAM : TagType()
+class PARAM : TagType(), TagWithoutText
     public var PARAM.name: String by Attributes.stringName
     public var PARAM.value: String by Attributes.stringValue
 
@@ -300,7 +300,7 @@ class SAMP : TagType(), CommonAllow
 
 class SECTION : TagType(), CommonAllow
 
-class SELECT : TagType(), AllowOPTGROUP, AllowOPTION
+class SELECT : TagType(), AllowOPTGROUP, AllowOPTION, TagWithoutText
     public var SELECT.autofocus: Boolean by Attributes.autofocus
     public var SELECT.disabled: Boolean by Attributes.disabled
     public var SELECT.form: String by Attributes.form
@@ -310,7 +310,7 @@ class SELECT : TagType(), AllowOPTGROUP, AllowOPTION
 
 class SMALL : TagType(), CommonAllow
 
-class SOURCE : TagType()
+class SOURCE : TagType(), TagWithoutText
     public var SOURCE.media: String by Attributes.media
     public var SOURCE.src: Link by Attributes.src
     public var SOURCE.type_: String by Attributes.stringType
@@ -323,12 +323,12 @@ class SUB : TagType(), CommonAllow
 
 class SUP : TagType(), CommonAllow
 
-class SVG : TagType()
+class SVG : TagType(), TagWithoutText
 
-class TABLE : TagType(), AllowCAPTION, AllowCOLGROUP, AllowTBODY, AllowTFOOT, AllowTHEAD, AllowTR
+class TABLE : TagType(), AllowCAPTION, AllowCOLGROUP, AllowTBODY, AllowTFOOT, AllowTHEAD, AllowTR, TagWithoutText
     public var TABLE.summary: String by Attributes.summary
 
-class TBODY : TagType(), AllowTR
+class TBODY : TagType(), AllowTR, TagWithoutText
 
 class TD : TagType(), CommonAllow
     public var TD.colspan: Int by Attributes.colspan
@@ -348,7 +348,7 @@ class TEXTAREA : TagType()
     public var TEXTAREA.rows: Int by Attributes.rows
     public var TEXTAREA.wrap: Wrap by Attributes.wrap
 
-class TFOOT : TagType(), AllowTR
+class TFOOT : TagType(), AllowTR, TagWithoutText
 
 class TH : TagType(), CommonAllow
     public var TH.colspan: Int by Attributes.colspan
@@ -356,14 +356,14 @@ class TH : TagType(), CommonAllow
     public var TH.rowspan: Int by Attributes.rowspan
     public var TH.scope: Scope by Attributes.scope
 
-class THEAD : TagType(), AllowTR
+class THEAD : TagType(), AllowTR, TagWithoutText
 
 class TIME : TagType(), CommonAllow
     public var TIME.datetime: String by Attributes.datetime
 
-class TR : TagType(), AllowTD, AllowTH
+class TR : TagType(), AllowTD, AllowTH, TagWithoutText
 
-class UL : TagType(), AllowLI
+class UL : TagType(), AllowLI, TagWithoutText
 
 class VAR_ : TagType(), CommonAllow
 
