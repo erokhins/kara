@@ -3,6 +3,7 @@ package kara
 import kotlin.html.*
 import java.io.OutputStreamWriter
 import java.io.FileOutputStream
+import com.sun.tools.doclets.formats.html.markup.HtmlTag
 
 /** A class for programmatically generating CSS stylesheets.
  */
@@ -32,47 +33,49 @@ abstract class Stylesheet(var namespace : String = "") : Resource("text/css", "c
     }
 }
 
-fun HEAD.style(media: String = "all", mimeType: String = "text/css", buildSheet: CssElement.() -> Unit) {
+fun Tag<HEAD>.style(media: String = "all", mimeType: String = "text/css", buildSheet: CssElement.() -> Unit) {
     val stylesheet = object : Stylesheet("") {
         override fun CssElement.render() {
             buildSheet()
         }
     }
-    val tag = build(STYLE(this, stylesheet), { })
-    tag.media = media
-    tag.mimeType = mimeType
-}
-
-fun HEAD.stylesheet(stylesheet: Stylesheet)  = build(STYLESHEETLINK(this, stylesheet), { })
-
-class STYLE(containingTag : HEAD, val stylesheet : Stylesheet) : HtmlHeadTagWithText(containingTag, "style") {
-    public var media : String by StringAttribute("media")
-    public var mimeType : String by Attributes.mimeType
-
-    {
-        media = "all"
-        mimeType = "text/css"
-    }
-
-    override fun renderElement(builder: StringBuilder, indent: String) {
-        builder.append("$indent<$tagName${renderAttributes()}>\n")
-        builder.append(stylesheet.toString())
-        builder.append("$indent</$tagName>\n")
+    builder.contentTag(this) {
+        val tag = STYLE(this@style.builder, stylesheet)
+        with(tag) {
+            metada.media = media
+            metada.mimeType = mimeType
+        }
+        tag
     }
 }
 
-class STYLESHEETLINK(containingTag : HEAD, var stylesheet : Stylesheet) : HtmlTag(containingTag, "link", RenderStyle.empty) {
-    public var href : Link by Attributes.href
-    public var rel : LinkType by Attributes.rel
-    public var mimeType : String by Attributes.mimeType
-    {
+fun Tag<HEAD>.stylesheet(stylesheet: Stylesheet)  = contentTag(::STYLESHEETLINK, "link", renderStyle = RenderStyle.empty, contents = {
+    attr{
+        href = stylesheet
         rel = LinkType.stylesheet
         mimeType = "text/css"
     }
+})
 
+class STYLE(builder: HtmlBuilder, val stylesheet : Stylesheet) : AbstractTag(builder) {
+    public var TagMetadata.media : String by StringAttribute("media")
+    public var TagMetadata.mimeType : String by Attributes.mimeType
 
-    override fun renderElement(builder: StringBuilder, indent: String) {
-        href = stylesheet
-        super<HtmlTag>.renderElement(builder, indent)
+    {
+        metada.tagName = "style"
+        metada.media = "all"
+        metada.mimeType = "text/css"
+    }
+
+    override fun renderElement(strBuilder: StringBuilder, indent: String) {
+        strBuilder.append("$indent<${metada.tagName}${builder.renderAttributes(this)}>\n")
+        strBuilder.append(stylesheet.toString())
+        strBuilder.append("$indent</${metada.tagName}>\n")
     }
 }
+
+class STYLESHEETLINK : TagType()
+    public var STYLESHEETLINK.href : Link by Attributes.href
+    public var STYLESHEETLINK.rel : LinkType by Attributes.rel
+    public var STYLESHEETLINK.mimeType : String by Attributes.mimeType
+
