@@ -14,28 +14,28 @@ abstract class HtmlView(val layout : HtmlLayout? = null) : ActionResult {
             writer.write(this.toString(context))
         }
         else {
-            val page = HTML()
+            val page = HTML(DefaultHtmlBuilder())
             with(layout!!) {
                 page.render(context, this@HtmlView)
             }
-            writer.write(page.toString()!!)
+            val strBuilder = StringBuilder()
+            page.renderElement(strBuilder, "")
+            writer.write(strBuilder.toString())
         }
         writer.flush()
     }
 
-    fun <T:Any> with(t: T, body: T.() -> Unit) {
-        t.body()
-    }
+    class VIEW : TagType(), CommonAllow
 
     fun toString(context: ActionContext): String {
-        val root = HtmlBodyTag()
+        val root = Tag<VIEW>(::VIEW, "view")
         root.render(context)
 
-        val builder = StringBuilder()
+        val strBuilder = StringBuilder()
         for (child in root.children) {
-            child.renderElement(builder, "")
+            child.renderElement(strBuilder, "")
         }
-        return builder.toString()
+        return strBuilder.toString()
     }
 
 

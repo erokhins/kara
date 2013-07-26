@@ -29,7 +29,7 @@ class BeanFormModel(val model: Any) : FormModel<String> {
 }
 
 fun <P,M:FormModel<P>> Tag<CommonAllow>.formForModel(model: M, action : Link, formMethod : Method = Method.post, contents: FormBuilder<P,M>.() -> Unit) {
-    val builder = FormBuilder(this, model)
+    val builder = FormBuilder(model)
     builder.attr.action = action
     builder.attr.method = formMethod
     builder.contents()
@@ -46,7 +46,7 @@ fun Tag<CommonAllow>.formForBean(bean: Any, action : Link, formMethod : Method =
 /**
  * Allows forms to be built based on a model object.
  */
-class FormBuilder<P, M:FormModel<P>>(containingTag : Tag<*>, val model : M) : Tag<FORM>(containingTag, ::FORM, "form") {
+class FormBuilder<P, M:FormModel<P>>(val model : M) : Tag<FORM>(::FORM, "form") {
     val logger = Logger.getLogger(this.javaClass)!!
 
     /** If true, the form will have enctype="multipart/form-data" */
