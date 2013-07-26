@@ -29,13 +29,16 @@ class BeanFormModel(val model: Any) : FormModel<String> {
 }
 
 fun <P,M:FormModel<P>> Tag<CommonAllow>.formForModel(model: M, action : Link, formMethod : Method = Method.post, contents: FormBuilder<P,M>.() -> Unit) {
-    val builder = FormBuilder(model)
-    builder.attr.action = action
-    builder.attr.method = formMethod
-    builder.contents()
-
-    if (builder.hasFiles) {
-        builder.attr.enctype = Enctype.multipart_form_data
+    builder.contentTag(this, {
+        val builder = FormBuilder(model)
+        builder.attr.action = action
+        builder.attr.method = formMethod
+        builder
+    }) {
+        contents()
+        if (hasFiles) {
+            attr.enctype = Enctype.multipart_form_data
+        }
     }
 }
 
