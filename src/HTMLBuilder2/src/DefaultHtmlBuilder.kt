@@ -9,6 +9,12 @@ fun String.htmlEscape(): String {
 }
 
 public class DefaultHtmlBuilder : HtmlBuilder {
+
+    override fun contentTag(contentTag: AbstractTag, tag: () -> AbstractTag) {
+        val newTag = tag()
+        contentTag.children.add(newTag)
+    }
+
     override fun <T : TagType> contentTag(containingTag: AbstractTag, tagType: () -> T, contents: Tag<T>.() -> Unit) {
         val newTag = Tag<T>(tagType, builder = containingTag.builder)
         newTag.contents()

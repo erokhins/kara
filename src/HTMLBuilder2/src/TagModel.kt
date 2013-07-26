@@ -22,6 +22,7 @@ import java.util.ArrayList
 
 trait HtmlBuilder {
     fun <T : TagType> contentTag(containingTag: AbstractTag, tagType: () -> T, contents: Tag<T>.() -> Unit)
+    fun contentTag(contentTag: AbstractTag, tag: () -> AbstractTag)
     fun appendText(tag: AbstractTag, text: String)
     fun getText(tag: AbstractTag): String?
     fun setText(tag: AbstractTag, value: String?)
