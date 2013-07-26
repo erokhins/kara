@@ -30,15 +30,15 @@ class BeanFormModel(val model: Any) : FormModel<String> {
 
 fun <P,M:FormModel<P>> Tag<CommonAllow>.formForModel(model: M, action : Link, formMethod : Method = Method.post, contents: FormBuilder<P,M>.() -> Unit) {
     builder.contentTag(this, {
+        contents()
+        if (hasFiles) {
+            attr.enctype = Enctype.multipart_form_data // TODO: fix error, when flow generate
+        }
+    }) {
         val builder = FormBuilder(model)
         builder.attr.action = action
         builder.attr.method = formMethod
         builder
-    }) {
-        contents()
-        if (hasFiles) {
-            attr.enctype = Enctype.multipart_form_data
-        }
     }
 }
 

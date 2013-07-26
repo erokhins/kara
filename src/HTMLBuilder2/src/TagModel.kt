@@ -21,8 +21,7 @@ import java.util.ArrayList
 
 
 trait HtmlBuilder {
-    fun <T : AbstractTag> contentTag(containingTag: AbstractTag, tag: () -> T, contents: T.() -> Unit)
-    fun contentTag(contentTag: AbstractTag, tag: () -> AbstractTag)
+    fun <T : AbstractTag> contentTag(containingTag: AbstractTag, contents: T.() -> Unit = empty_contents, tag: () -> T)
     fun appendText(tag: AbstractTag, text: String)
     fun getText(tag: AbstractTag): String?
     fun setText(tag: AbstractTag, value: String?)
@@ -124,21 +123,21 @@ fun <T : TagType> AbstractTag.contentTag(tagType: () -> T, tagName: String, c: S
                                     contents: Tag<T>.() -> Unit = empty_contents,
                                     renderStyle: RenderStyle = RenderStyle.expanded,
                                     contentStyle: ContentStyle = ContentStyle.block) {
-    builder.contentTag(this, {Tag<T>(tagType, builder = builder)}) {
-        metada.tagName = tagName
-        metada.renderStyle = renderStyle
-        metada.contentStyle = contentStyle
-        if (c != null) attr.c = c
-        if (id != null) attr.id = id
-
-        contents()
+    builder.contentTag(this, contents) {
+        val newTag = Tag<T>(tagType, tagName, builder)
+        with(newTag) {
+            metada.renderStyle = renderStyle
+            metada.contentStyle = contentStyle
+            if (c != null) attr.c = c
+            if (id != null) attr.id = id
+        }
+        newTag
     }
 }
 
 fun <T : TagType> AbstractTag.contentTag(tagType: () -> T, tagName: String, contents: Tag<T>.() -> Unit = empty_contents) {
-    builder.contentTag(this, {Tag<T>(tagType, builder = builder)}) {
-        metada.tagName = tagName
-        contents()
+    builder.contentTag(this, contents) {
+        Tag<T>(tagType, tagName, builder)
     }
 }
 
