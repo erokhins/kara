@@ -62,8 +62,9 @@ public class DefaultHtmlBuilder : HtmlBuilder {
         }
     }
 
-    private fun AbstractTag.renderAttributes(): String? {
+    override fun renderAttributes(tag: AbstractTag): String? {
         val builder = StringBuilder()
+        val attributes = tag.attributes
         for (a in attributes.keySet()) {
             val attr = attributes[a]!!
             if (attr.length > 0) {
@@ -73,6 +74,10 @@ public class DefaultHtmlBuilder : HtmlBuilder {
         return builder.toString()
     }
 
+    private fun AbstractTag.renderAttrs(): String? {
+        return renderAttributes(this)
+    }
+
     override fun renderElement(tag: AbstractTag, strBuilder: StringBuilder, indent: String) {
         with(tag) {
             val count = children.size()
@@ -80,23 +85,23 @@ public class DefaultHtmlBuilder : HtmlBuilder {
             val tagName = metada.tagName
             when {
                 count == 0 && metada.renderStyle != RenderStyle.expanded -> {
-                    strBuilder.append("<$tagName${renderAttributes()}/>")
+                    strBuilder.append("<$tagName${renderAttrs()}/>")
                 }
                 count != 0 && metada.renderStyle == RenderStyle.empty -> {
                     throw InvalidHtmlException("Empty tag has children")
                 }
                 children.all { it.computeContentStyle() == ContentStyle.text } -> {
-                    strBuilder.append("<$tagName${renderAttributes()}>")
+                    strBuilder.append("<$tagName${renderAttrs()}>")
                     for (c in children) {
                         c.renderElement(strBuilder, "")
                     }
                     strBuilder.append("</$tagName>")
                 }
                 count == 0 -> {
-                    strBuilder.append("<$tagName${renderAttributes()}></$tagName>")
+                    strBuilder.append("<$tagName${renderAttrs()}></$tagName>")
                 }
                 else -> {
-                    strBuilder.append("<$tagName${renderAttributes()}>\n")
+                    strBuilder.append("<$tagName${renderAttrs()}>\n")
                     for (c in children) {
                         c.renderElement(strBuilder, indent + "  ")
                     }

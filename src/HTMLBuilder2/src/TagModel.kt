@@ -28,6 +28,7 @@ trait HtmlBuilder {
     fun setText(tag: AbstractTag, value: String?)
 
     fun renderElement(tag: AbstractTag, strBuilder: StringBuilder, indent: String)
+    fun renderAttributes(tag: AbstractTag): String?
 }
 
 enum class RenderStyle {
@@ -105,7 +106,7 @@ abstract class AbstractTag(val builder: HtmlBuilder = DefaultHtmlBuilder()) {
             builder.setText(this@AbstractTag, value)
         }
 
-    protected abstract fun assertAllowText()
+    protected open fun assertAllowText() {}
 }
 
 open class Tag<out T>(val tagType: () -> T, tagName: String? = null, builder: HtmlBuilder = DefaultHtmlBuilder()) : AbstractTag(builder), DeprecateTags {
