@@ -4,6 +4,9 @@ open class HTML(builder: HtmlBuilder) : AbstractTag(builder) {
     protected override fun assertAllowText() {
         throw InvalidHtmlException("Text not allow in html")
     }
+    {
+        metada.tagName = "html"
+    }
 
     public var doctype: String = "<!DOCTYPE html>"
 
