@@ -5,7 +5,7 @@
 package kotlin.html
 
 public class DefaultHtmlBuilder : HtmlBuilder {
-    override fun <T : TagType> contentTag(containingTag: Tag<Any?>, tagType: () -> T, contents: Tag<T>.() -> Unit) {
+    override fun <T : TagType> contentTag(containingTag: AbstractTag, tagType: () -> T, contents: Tag<T>.() -> Unit) {
         val newTag = Tag<T>(tagType, builder = containingTag.builder)
         newTag.contents()
         containingTag.children.add(newTag)
@@ -26,9 +26,9 @@ public class DefaultHtmlBuilder : HtmlBuilder {
         public fun escapedText(): String = textInNode.htmlEscape()
     }
 
-    override fun AbstractTag.appendText(text: String) {
-        val textNode = HtmlText(text, builder)
-        children.add(textNode)
+    override fun appendText(tag: AbstractTag, text: String) {
+        val textNode = HtmlText(text, tag.builder)
+        tag.children.add(textNode)
     }
     override fun getText(tag: AbstractTag): String? {
         if (tag.children.size == 1) {
@@ -42,7 +42,7 @@ public class DefaultHtmlBuilder : HtmlBuilder {
     override fun setText(tag: AbstractTag, value: String?) {
         tag.children.clear()
         if (value != null)
-            tag.appendText(value)
+            appendText(tag, value)
     }
 
     private fun String.htmlEscape(): String {

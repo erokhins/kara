@@ -21,8 +21,8 @@ import java.util.ArrayList
 
 
 trait HtmlBuilder {
-    fun <T : TagType> contentTag(containingTag: Tag<*>, tagType: () -> T, contents: Tag<T>.() -> Unit)
-    fun AbstractTag.appendText(text: String)
+    fun <T : TagType> contentTag(containingTag: AbstractTag, tagType: () -> T, contents: Tag<T>.() -> Unit)
+    fun appendText(tag: AbstractTag, text: String)
     fun getText(tag: AbstractTag): String?
     fun setText(tag: AbstractTag, value: String?)
 
@@ -91,9 +91,7 @@ abstract class AbstractTag(val builder: HtmlBuilder = DefaultHtmlBuilder()) {
 
     public fun String.plus() {
         assertAllowText()
-        with(builder) {
-            appendText(this@plus)
-        }
+        builder.appendText(this@AbstractTag, this@plus)
     }
 
     public var text: String?
@@ -120,7 +118,7 @@ class Tag<out T>(val tagType: () -> T, tagName: String? = null, builder: HtmlBui
     }
 }
 
-fun <T : TagType> Tag<*>.contentTag(tag: () -> T, tagName: String, c: StyleClass? = null, id: String? = null,
+fun <T : TagType> AbstractTag.contentTag(tag: () -> T, tagName: String, c: StyleClass? = null, id: String? = null,
                                     contents: Tag<T>.() -> Unit = empty_contents,
                                     renderStyle: RenderStyle = RenderStyle.expanded,
                                     contentStyle: ContentStyle = ContentStyle.block) {
