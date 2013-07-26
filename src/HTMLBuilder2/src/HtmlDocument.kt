@@ -20,4 +20,5 @@ open class HTML(builder: HtmlBuilder) : AbstractTag(builder) {
 class BODY: TagType(), CommonAllow
 // TODO: events
 
-fun HTML.body(contents: Tag<CommonAllow>.() -> Unit) = contentTag(::BODY, "body", contents = contents)
+fun HTML.body(contents: Tag<BODY>.() -> Unit) = contentTag(::BODY, "body", contents)
+fun HTML.head(contents: Tag<HEAD>.() -> Unit) = contentTag(::HEAD, "head", contents)

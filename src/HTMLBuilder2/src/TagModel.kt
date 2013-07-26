@@ -107,7 +107,7 @@ abstract class AbstractTag(val builder: HtmlBuilder = DefaultHtmlBuilder()) {
     protected abstract fun assertAllowText()
 }
 
-class Tag<out T>(val tagType: () -> T, tagName: String? = null, builder: HtmlBuilder = DefaultHtmlBuilder()) : AbstractTag(builder), DeprecateTags {
+open class Tag<out T>(val tagType: () -> T, tagName: String? = null, builder: HtmlBuilder = DefaultHtmlBuilder()) : AbstractTag(builder), DeprecateTags {
     {
         metada.tagName = tagName
     }
@@ -129,6 +129,13 @@ fun <T : TagType> AbstractTag.contentTag(tag: () -> T, tagName: String, c: Style
         if (c != null) attr.c = c
         if (id != null) attr.id = id
 
+        contents()
+    }
+}
+
+fun <T : TagType> AbstractTag.contentTag(tag: () -> T, tagName: String, contents: Tag<T>.() -> Unit = empty_contents) {
+    builder.contentTag(this, tag) {
+        metada.tagName = tagName
         contents()
     }
 }

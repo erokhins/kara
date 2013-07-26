@@ -62,6 +62,7 @@ object Attributes {
     val maxlength = StringAttribute("maxlength")
     val media = StringAttribute("media")
     val method = EnumAttribute("method", javaClass<Method>())
+    val mimeType = MimeAttribute("type")
     val stringMin = StringAttribute("min")
     val floatMin = FloatAttribute("min")
     val multiple = TickerAttribute("multiple")

@@ -14,68 +14,77 @@
  * limitations under the License.
  */
 
+package kotlin.html
+
 import kotlin.html.*
-import kotlin.html.deprecated.*
 
 
-class FOO(tag: Tag<*>) : TagType(tag), CommonAllow
+class FOO : TagType(), CommonAllow
     var FOO.bar = 2
 
 fun Tag<CommonAllow>.foo(id: String? = null, c: StyleClass? = null, contents: Tag<FOO>.() -> Unit = empty_contents) = contentTag(::FOO, "foo", c, id, contents)
 
-deprecated("") fun HtmlTag.foo(id: String? = null, c: StyleClass? = null, contents: Tag<FOO>.() -> Unit = empty_contents) {}
+deprecated("") fun DeprecateTags.foo(id: String? = null, c: StyleClass? = null, contents: Tag<FOO>.() -> Unit = empty_contents) {}
 
-fun TagWithText<DIV>.f() {
-    +""
-    attr {
-        id = ""
+fun HTML.f() {
+    head {
+
     }
-    div {
-        foo {
-            attr.bar = 2
-            attr {
-                bar = 4
-                id = "id34"
-            }
-            span {
-
-            }
+    body {
+        +""
+        attr {
+            id = ""
         }
-        table {
-            td {
+        div {
+            foo {
+                attr.bar = 2
+                attr {
+                    bar = 4
+                    id = "id34"
+                }
+                span {
 
+                }
             }
-            div {
-
-            }
-            foo {}
-            tr {
-                +""
+            table {
                 td {
-                    foo {}
+
+                }
+                div {
+
+                }
+                foo {}
+                tr {
                     +""
-                    keygen {
-                        attr.name = "sdg"
-                        attr {
-                            form = "form"
-                        }
+                    td {
+                        foo {}
                         +""
-                        table {
-                            foo {}
+                        keygen {
+                            attr.name = "sdg"
+                            attr {
+                                form = "form"
+                            }
+                            +""
+                            table {
+                                foo {}
+                            }
                         }
                     }
                 }
             }
         }
     }
+
 }
 
 fun main(args: Array<String>) {
-    val div = TagWithText<DIV>(null, ::DIV, "div")
-    div.f()
-    div.attr.dir = Dir.ltr
+    val html = HTML(DefaultHtmlBuilder())
+    html.f()
+    val s = StringBuilder()
+    html.renderElement(s, "")
+    println(s.toString())
 
-    val input = Tag<INPUT>(null, ::INPUT, "input")
+    val input = Tag<INPUT>(::INPUT, "input")
     input.attr.value
     input.attr {
         value
