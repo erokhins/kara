@@ -4,6 +4,10 @@
 
 package kotlin.html
 
+fun String.htmlEscape(): String {
+    return replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\"", "&quot;")
+}
+
 public class DefaultHtmlBuilder : HtmlBuilder {
     override fun <T : TagType> contentTag(containingTag: AbstractTag, tagType: () -> T, contents: Tag<T>.() -> Unit) {
         val newTag = Tag<T>(tagType, builder = containingTag.builder)
@@ -43,10 +47,6 @@ public class DefaultHtmlBuilder : HtmlBuilder {
         tag.children.clear()
         if (value != null)
             appendText(tag, value)
-    }
-
-    private fun String.htmlEscape(): String {
-        return replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\"", "&quot;")
     }
 
     private fun AbstractTag.computeContentStyle(): ContentStyle {
