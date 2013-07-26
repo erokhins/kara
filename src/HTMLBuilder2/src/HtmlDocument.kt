@@ -1,12 +1,15 @@
 package kotlin.html
 
-open class HTML() : HtmlTag(null, "html") {
+open class HTML(builder: HtmlBuilder) : AbstractTag(builder) {
+    protected override fun assertAllowText() {
+        throw InvalidHtmlException("Text not allow in html")
+    }
 
     public var doctype: String = "<!DOCTYPE html>"
 
-    override fun renderElement(builder: StringBuilder, indent: String) {
-        builder.append("$doctype\n")
-        super<HtmlTag>.renderElement(builder, indent)
+    override fun renderElement(strBuilder: StringBuilder, indent: String) {
+        strBuilder.append("$doctype\n")
+        super<AbstractTag>.renderElement(strBuilder, indent)
     }
 }
 
@@ -14,7 +17,7 @@ open class HTML() : HtmlTag(null, "html") {
 //class BODY(containingTag: HTML) : HtmlBodyTagWithText(containingTag, "body")
 
 
-fun HTML.body(contents: HtmlBodyTag.() -> Unit) {
-    val newTag = HtmlBodyTag(this, "body")
-    newTag.contents()
-}
+class BODY: TagType(), CommonAllow
+// TODO: events
+
+fun HTML.body(contents: Tag<CommonAllow>.() -> Unit) = contentTag(::BODY, "body", contents = contents)
