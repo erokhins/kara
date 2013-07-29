@@ -19,10 +19,10 @@ package kotlin.html
 import kotlin.html.*
 
 
-class FOO : TagType(), CommonAllow
+class FOO : TagType(), CommonBodyContent
     var FOO.bar = 2
 
-fun Tag<CommonAllow>.foo(id: String? = null, c: StyleClass? = null, contents: Tag<FOO>.() -> Unit = empty_contents) = contentTag(::FOO, "foo", c, id, contents)
+fun Tag<CommonBodyContent>.foo(id: String? = null, c: StyleClass? = null, contents: Tag<FOO>.() -> Unit = empty_contents) = contentTag(::FOO, "foo", c, id, contents)
 
 deprecated("") fun DeprecateTags.foo(id: String? = null, c: StyleClass? = null, contents: Tag<FOO>.() -> Unit = empty_contents) {}
 

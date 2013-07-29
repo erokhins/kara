@@ -58,7 +58,7 @@ class ErrorLayout(): HtmlLayout() {
  * The standard Kara error page.
  */
 class ErrorView(val ex: Throwable): HtmlView(ErrorLayout()) {
-    override fun Tag<CommonAllow>.render(context: ActionContext) {
+    override fun Tag<CommonBodyContent>.render(context: ActionContext) {
         div(id = "header") {
             h1 { +"Error Rendering Page" }
             val message = ex.getMessage()

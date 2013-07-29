@@ -8,7 +8,7 @@ import karademo.views.DefaultLayout
 import kotlin.html.*
 
 class Forms(val book : Book) : HtmlView(DefaultLayout()) {
-    override fun Tag<CommonAllow>.render(context: ActionContext) {
+    override fun Tag<CommonBodyContent>.render(context: ActionContext) {
         h2 { +"Forms" }
         formForBean(book, Home.Update(), Method.post) {
 

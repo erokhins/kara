@@ -20,7 +20,7 @@ open class HTML(builder: HtmlBuilder) : AbstractTag(builder) {
 //class BODY(containingTag: HTML) : HtmlBodyTagWithText(containingTag, "body")
 
 
-class BODY: TagType(), CommonAllow
+class BODY: TagType(), CommonBodyContent
 // TODO: events
 
 fun HTML.body(contents: Tag<BODY>.() -> Unit) = contentTag(::BODY, "body", contents)
