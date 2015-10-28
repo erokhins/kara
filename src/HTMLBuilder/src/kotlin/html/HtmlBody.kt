@@ -40,6 +40,8 @@ public abstract class HtmlBodyTag(containingTag: HtmlTag?, name: String, renderS
     fun setClass(c: String) {
         attribute("class", c)
     }
+
+    operator fun (HtmlBodyTag.() -> Unit).unaryPlus() = this()
 }
 
 inline fun <T : HtmlBodyTag> contentTag(tag: T, c: String, contents: T.() -> Unit) {

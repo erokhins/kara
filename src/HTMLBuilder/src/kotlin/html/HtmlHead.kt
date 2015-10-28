@@ -3,8 +3,8 @@ package kotlin.html
 fun HTML.head(init: HEAD.() -> Unit) = build(HEAD(this), init)
 fun HEAD.title(init: TITLE.() -> Unit = { }) = build(TITLE(this), init)
 
-fun HEAD.title(text: String) {
-    build(TITLE(this), { +text })
+fun HEAD.title(text_: String) {
+    build(TITLE(this), { +text_ })
 }
 
 fun HEAD.link(href: Link, rel: String = "stylesheet", mimeType: String = "text/css", content: _LINK.() -> Unit = { }) {
